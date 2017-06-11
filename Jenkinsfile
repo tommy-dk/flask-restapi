@@ -26,6 +26,6 @@ node {
     stage('Deploy image') {
         sh 'docker stop flask-restapi'
         sh 'docker rm flask-restapi'
-        docker.image('flask-restapi:${env.BUILD_NUMBER}').run('-p 8000:8000 --name flask-restapi')
+        docker.image("flask-restapi:${env.BUILD_NUMBER}").run('-p 8000:8000 --name flask-restapi')
     }
 }

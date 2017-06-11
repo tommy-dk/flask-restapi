@@ -31,4 +31,8 @@ node {
             sh "curl -i http://localhost:8000/"
         }
     }
+
+    stage('Deploy image') {
+        docker.image('flask-restapi').run('-p 8000:8000')
+    }
 }

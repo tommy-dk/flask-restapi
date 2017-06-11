@@ -14,15 +14,6 @@ node {
         app = docker.build("flask-restapi")
     }
 
-    stage('Test image') {
-        /* Ideally, we would run a test framework against our image.
-         * For this example, we're using a Volkswagen-type approach ;-) */
-
-        app.inside {
-            sh 'echo "Tests passed"'
-        }
-    }
-
     stage('Push image') {
         /* Finally, we'll push the image with two tags:
          * First, the incremental build number from Jenkins
@@ -34,5 +25,10 @@ node {
             app.push("latest")
         }
     */
+    }
+    stage('Test image') {
+        docker.image('flask-restapi').withRun('-p 8000:8000') {c ->
+            sh "curl -i http://${hostIp(c)}:8000/"
+        }
     }
 }

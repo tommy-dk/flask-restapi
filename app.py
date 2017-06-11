@@ -1,6 +1,6 @@
+from datetime import datetime
 from flask import Flask
 app = Flask(__name__)
-import time
 
 @app.route('/')
 def hello_world():
@@ -8,7 +8,7 @@ def hello_world():
 
 @app.route('/time')
 def time():
-    return time.time()
+    return str(datetime.now())
 
 if __name__ == '__main__':
     app.run(debug=True,host='0.0.0.0')
